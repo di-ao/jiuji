@@ -24,7 +24,7 @@
 
 ## 1.整体执行流程
 
-![](K:\jiuji\img\流程.png)
+![](https://github.com/di-ao/jiuji/blob/main/img/%E6%B5%81%E7%A8%8B.png)
 
 
 
@@ -38,7 +38,7 @@
 
 2. 根据自己电脑环境更改jiuji.py脚本里面的工具路径及工具目录。
 
-   <img src="K:\jiuji\img\路径.png" style="zoom:100%;" />
+   <img src="https://github.com/di-ao/jiuji/blob/main/img/%E8%B7%AF%E5%BE%84.png" />
 
 3. 添加域名到domain.txt或添加url到url.txt。
 
@@ -52,7 +52,7 @@
    xray.exe webscan --listen 127.0.0.1:7777 --html-output xxx.html
    ```
 
-   <img src="K:\jiuji\img\功能.png" style="zoom:100%;" />
+   <img src="https://github.com/di-ao/jiuji/blob/main/img/%E5%8A%9F%E8%83%BD.png" />
 
 ## 3.注意事项
 
