@@ -48,7 +48,7 @@
 
    <img src="https://github.com/di-ao/jiuji/blob/main/img/%E8%B7%AF%E5%BE%84.png" />
 
-3. 添加域名到domain.txt -->（域名爆破） ||  添加url到url.txt --> （指纹识别&爬虫） ||  添加IP/域名到domain2.txt -->（存活检测） 【每行一个域名/IP】
+3. 添加域名到domain.txt -->（域名爆破） ||  添加IP/域名到domain2.txt -->（存活检测） ||  添加url到url.txt --> （指纹识别&爬虫）【每行一个域名/IP】
 
 4. 使用功能模块。
 
