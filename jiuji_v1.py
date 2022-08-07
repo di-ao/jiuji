@@ -41,7 +41,8 @@ def domian():
 
 def re_proxy(url, headers, proxies):
     """使用代理检测"""
-    
+
+
     try:
         r1 = requests.get(url, headers=headers,proxies=proxies, timeout=(3, 9), verify=False)
         if r1.status_code == requests.codes.ok:
@@ -59,6 +60,7 @@ def re_proxy(url, headers, proxies):
 def re_not(url, headers):
     """不使用代理检测"""
 
+
     try:
         r2 = requests.get(url, headers=headers, timeout=(3, 9), verify=False)
         if r2.status_code == requests.codes.ok:
@@ -75,6 +77,8 @@ def re_not(url, headers):
 
 def re():
     """检测主模块"""
+
+
     url_https = "https://"
     url_http = "http://"
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"}
