@@ -38,10 +38,11 @@
 
 ## 2.使用
 
-1. 安装requests库。
+1. 安装requests和urllib3库。
 
    ```
    pip install requests
+   pip install urllib3
    ```
 
 2. 根据自己电脑环境更改jiuji.py脚本里面的工具路径及工具目录。
