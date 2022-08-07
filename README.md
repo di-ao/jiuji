@@ -20,13 +20,21 @@
 
 ------
 
+# 计划更新
+
+- [x] 添加web常用端口检测
+
+- [ ] 添加主机扫描模块
+
+------
+
 # 快速使用
 
 ## 1.整体执行流程
 
 ![](https://github.com/di-ao/jiuji/blob/main/img/%E6%B5%81%E7%A8%8B.png)
 
-
+------
 
 ## 2.使用
 
@@ -40,7 +48,7 @@
 
    <img src="https://github.com/di-ao/jiuji/blob/main/img/%E8%B7%AF%E5%BE%84.png" />
 
-3. 添加域名到domain.txt或添加url到url.txt。
+3. 添加域名到domain.txt -->（域名爆破） ||  添加url到url.txt --> （爬虫） ||  添加IP/域名到domain2.txt -->（存活检测） 【每行一个域名/IP】
 
 4. 使用功能模块。
 
@@ -54,10 +62,15 @@
 
    <img src="https://github.com/di-ao/jiuji/blob/main/img/%E5%8A%9F%E8%83%BD.png" />
 
+------
+
 ## 3.注意事项
 
 - observe导出csv文件查看乱码，可使用notepad++，选择【编码】-【转为ANSI编码】
 - rad需要安装**chrome**浏览器（在windows平台可调用win10自带edge浏览器，不一定需要安装**chrome**）
+- IP/域名批量存活检测模块默认线程池的值500，可根据需求设置。检测速度受电脑性能、线程池值和上游代理影响。
+
+------
 
 # iヾ(•ω•`)o
 
