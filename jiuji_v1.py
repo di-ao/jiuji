@@ -83,7 +83,7 @@ def re():
     url_http = "http://"
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"}
     proxies = {"http": PROXY}
-    port = ["80", "443", "4443", "21", "2121", "81", "82", "88", "89", "90", "7001", "7002", "8000", "8088", "8080", "8081", "8089", "8161", "8443", "8880", "8888", "9001", "9090", "9080", "5800", "5984", "9200", "9300", "10000", "28017", "50070", "2181", "9092", "16010", "60010", "1900"]
+    port = ["80", "443", "4443", "21", "2121", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "7001", "7002", "8000", "8088", "8080", "8081", "8089", "8161", "8443", "8880", "8888", "9001", "9090", "9080", "5800", "5443", "5984", "9200", "9300", "10000", "28017", "50070", "2181", "9092", "16010", "60010", "1900"]
     
     with open("domain2.txt") as domian:
         domain_list = domian.readlines()
@@ -153,14 +153,15 @@ def rad():
 
     
     with open("url.txt") as rad_url:
-        rad_list = rad_url.readlines()
-        if not rad_list:
+        rad_lists = rad_url.readlines()
+        if not rad_lists:
             print("url.txt文件没有内容,请重新尝试")
             sys.exit()
         else:    
-            for lines in rad_list:
-                line = lines.strip()
-                cmd = subprocess.Popen([RAD, '-t', line, '--http-proxy', '127.0.0.1:7777'], shell=True, encoding="utf-8",cwd=RAD_PHAT)
+            lines = list(set(rad_lists))
+            for line in lines:
+                url = line.strip()
+                cmd = subprocess.Popen([RAD, '-t', url, '--http-proxy', '127.0.0.1:7777'], shell=True, encoding="utf-8",cwd=RAD_PHAT)
                 cmd.wait()
 
 
