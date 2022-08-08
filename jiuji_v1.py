@@ -85,13 +85,14 @@ def re():
     proxies = {"http": PROXY}
     port = ["80", "443", "4443", "21", "2121", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "7001", "7002", "8000", "8088", "8080", "8081", "8089", "8161", "8443", "8880", "8888", "9001", "9090", "9080", "5800", "5443", "5984", "9200", "9300", "10000", "28017", "50070", "2181", "9092", "16010", "60010", "1900"]
     
-    with open("domain2.txt") as domian:
-        domain_list = domian.readlines()
+    with open("domain2.txt") as domians:
+        domain_lists = domians.readlines()
         
-        if not domain_list:
+        if not domain_lists:
             print("domain2.txt文件没有内容,请重新尝试")
             sys.exit()
         else:
+            domain_list = list(set(domain_lists))
             for d in domain_list:
                 for p in port:
                     url_list1 = url_http + d.strip() + ":" + p
