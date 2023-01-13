@@ -53,14 +53,16 @@
 
 4. 使用功能模块。
 
-   > 如果使用3、4功能模块，必须先启动xray！！！
+   > - 如果使用3、4功能模块，必须先启动xray！！！
    >
-   > **强烈建议xray和rad根据实际环境需求更改config配置文件**。
+   > - **强烈建议xray和rad根据实际环境需求更改config配置文件**。
 
    ```
    xray.exe webscan --listen 127.0.0.1:7777 --html-output xxx.html
    ```
 
+   - 此模块批量存活检测默认不检测web常用端口！！！需要启用请在all()函数内的re()函数设置为re(True)
+   
    <img src="https://github.com/di-ao/jiuji/blob/main/img/%E5%8A%9F%E8%83%BD.png" />
 
 ------

@@ -12,7 +12,7 @@ EHOLE = "xxx/Ehole/Ehole3.0-Win.exe"
 EHOLE_PHAT = "xxx/Ehole/"
 OBSERVER = "xxx/observer/observer_ward.exe"
 OBSERVER_PHAT = "xxx/observer/"
-RAD = "xxx/rad/rad_windows_amd64.exe"
+RAD = "xxx/rad/rad.exe"
 RAD_PHAT = "xxx/rad/"
 # url检测代理,只支持http,例:http://127.0.0.1:10809
 PROXY = ""
@@ -47,7 +47,7 @@ def re_proxy(url, headers, proxies):
         r1 = requests.get(url, headers=headers,proxies=proxies, timeout=(3, 9), verify=False)
         if r1.status_code == requests.codes.ok:
             URL_LIST.append(r1.url)
-            
+        r1.close()
     # except requests.exceptions.ReadTimeout:
     #     print("代理连接超时")                
     # except requests.exceptions.ProxyError:
@@ -65,7 +65,7 @@ def re_not(url, headers):
         r2 = requests.get(url, headers=headers, timeout=(3, 9), verify=False)
         if r2.status_code == requests.codes.ok:
             URL_LIST.append(r2.url)
-            
+        r2.close()
     # except requests.exceptions.ReadTimeout:
     #     print("代理连接超时")                
     # except requests.exceptions.ProxyError:
@@ -75,7 +75,7 @@ def re_not(url, headers):
         pass
 
 
-def re():
+def re(multi_port=False):
     """检测主模块"""
 
 
@@ -83,7 +83,7 @@ def re():
     url_http = "http://"
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"}
     proxies = {"http": PROXY}
-    port = ["80", "443", "4443", "21", "2121", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "7001", "7002", "8000", "8088", "8080", "8081", "8089", "8161", "8443", "8880", "8888", "9001", "9090", "9080", "5800", "5443", "5984", "9200", "9300", "10000", "28017", "50070", "2181", "9092", "16010", "60010", "1900"]
+    port = ["80", "443", "4443", "21", "2121", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "7001", "7002", "8000", "8088", "8080", "8081", "8089", "8090", "8161", "8443", "8880", "8888", "9001", "9090", "9080", "5800", "5443", "5984", "9200", "9300", "10000", "28017", "50070", "2181", "9092", "16010", "60010", "1900"]
     
     with open("domain2.txt") as domians:
         domain_lists = domians.readlines()
@@ -92,11 +92,19 @@ def re():
             print("domain2.txt文件没有内容,请重新尝试")
             sys.exit()
         else:
-            domain_list = list(set(domain_lists))
-            for d in domain_list:
-                for p in port:
-                    url_list1 = url_http + d.strip() + ":" + p
-                    url_list2 = url_https + d.strip() + ":"  + p
+            if multi_port == True:
+                domain_list = list(set(domain_lists))
+                for d in domain_list:
+                    for p in port:
+                        url_list1 = url_http + d.strip() + ":" + p
+                        url_list2 = url_https + d.strip() + ":"  + p
+                        URL_LIST_PORT.append(url_list1)
+                        URL_LIST_PORT.append(url_list2)
+            else:
+                domain_list = list(set(domain_lists))
+                for d in domain_list:
+                    url_list1 = url_http + d.strip()
+                    url_list2 = url_https + d.strip()
                     URL_LIST_PORT.append(url_list1)
                     URL_LIST_PORT.append(url_list2)
                     
@@ -114,7 +122,7 @@ def re():
             print("**检测完成**")
     URL_LIST_PORT.clear()
     url = list(set(URL_LIST))
-    with open("url.txt","w") as url_list3: 
+    with open("url.txt", "w") as url_list3: 
         for i in url:
             url_list3.write(f"{i}\n")
     URL_LIST.clear()
@@ -130,6 +138,7 @@ def ehole():
     cmd.wait()
    
     shutil.move(EHOLE_PHAT + "ehole.json", "ehole.json")
+    print("\n")
 
 
 def observer():
@@ -139,6 +148,7 @@ def observer():
     shutil.copyfile("url.txt", OBSERVER_PHAT + "url.txt")
     
     if len(PROXY) > 0:
+        print("observer使用代理!")
         cmd = subprocess.Popen([OBSERVER, '-f', 'url.txt', '-c', 'observer.csv', '--proxy', PROXY], shell=True, encoding="utf-8", cwd=OBSERVER_PHAT)      
         cmd.wait()
     else:
@@ -147,23 +157,16 @@ def observer():
         cmd.wait()
 
     shutil.move(OBSERVER_PHAT + "observer.csv", "observer.csv")
+    print("\n")
 
 
 def rad():
     """rad爬虫"""
 
-    
-    with open("url.txt") as rad_url:
-        rad_lists = rad_url.readlines()
-        if not rad_lists:
-            print("url.txt文件没有内容,请重新尝试")
-            sys.exit()
-        else:    
-            lines = list(set(rad_lists))
-            for line in lines:
-                url = line.strip()
-                cmd = subprocess.Popen([RAD, '-t', url, '--http-proxy', '127.0.0.1:7777'], shell=True, encoding="utf-8",cwd=RAD_PHAT)
-                cmd.wait()
+    shutil.copyfile("url.txt", RAD_PHAT + "url.txt")
+
+    cmd = subprocess.Popen([RAD, '--uf', 'url.txt', '--http-proxy', '127.0.0.1:7777'], shell=True, encoding="utf-8",cwd=RAD_PHAT)
+    cmd.wait()
 
 
 def all():
@@ -184,11 +187,11 @@ if __name__ == "__main__":
 ( (_/ /       _| |__  ) \__/ (  ( (_/ /       _| |__ 
  \___/       /_____(  \______/   \___/       /_____( 
                         
-                    【啾乩】-Ver1.1                                                 
-                1.子域名爆破+批量存活检测
-                2.Ehole + observer 批量指纹识别
-                3.rad批量爬虫
-                4.使用所有功能
+                    【啾乩】-Ver1.2                                                 
+                【1】子域名爆破+批量存活检测
+                【2】Ehole + observer 批量指纹识别
+                【3】rad批量爬虫
+                【4】使用所有功能
 
     """)
 
@@ -197,9 +200,11 @@ if __name__ == "__main__":
         # while True:
             
         print("""
-        1.子域名爆破
-        2.IP/域名批量存活检测
-        3.子域名爆破+批量存活检测
+        【1】子域名爆破
+        【2】IP/域名批量存活检测
+        【3】IP/域名批量存活检测-web常用端口
+        【4】子域名爆破+批量存活检测
+        【5】子域名爆破+批量存活检测-web常用端口
         """)
         num1 = input("请输入对应功能的数字:")
         if num1 == "1":
@@ -209,9 +214,15 @@ if __name__ == "__main__":
             re()
             # sys.exit()
         elif num1 == "3":
+            re(True)
+
+        elif num1 == "4":
             domian()
             re()
             # sys.exit()
+        elif num1 == "5":
+            domian()
+            re(True)
         else:
             print("输入错误,请重新输入!")
             # cmd = subprocess.Popen('cls', shell=True)
