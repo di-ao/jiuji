@@ -63,6 +63,12 @@
 
    注意:此模块批量存活检测默认不检测web常用端口！！！需要启用请在all()函数内的re()函数设置为re(True)
    
+   
+   
+   
+   
+   
+   
    <img src="https://github.com/di-ao/jiuji/blob/main/img/%E5%8A%9F%E8%83%BD.png" />
 
 ------
