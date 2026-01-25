@@ -109,7 +109,7 @@ def re(multi_port=False):
                     URL_LIST_PORT.append(url_list2)
                     
             
-            with ThreadPoolExecutor(max_workers=500) as t:
+            with ThreadPoolExecutor(max_workers=16) as t:
                 if len(PROXY) > 0:
                     print("**检测使用代理** 正在检测请稍等...")
                     for line in URL_LIST_PORT:
@@ -239,3 +239,4 @@ if __name__ == "__main__":
     else:
         print("输入错误,请重新输入!")
         sys.exit()
+
